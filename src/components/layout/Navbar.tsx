@@ -23,7 +23,7 @@ export function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="p-2 bg-primary rounded-lg">
-                <Calendar className="h-6 w-6 text-primary-foreground animate-spin" />
+                <Calendar className="h-6 w-6 text-primary-foreground transition-transform duration-300 hover:animate-spin" />
               </div>
               <span className="text-xl font-bold">EventBooker</span>
             </Link>
