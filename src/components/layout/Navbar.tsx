@@ -32,16 +32,16 @@ export function Navbar() {
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
-              <Link to="/" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/" className="text-foreground hover:text-primary transition-colors duration-200 hover:scale-105 transform">
                 Home
               </Link>
-              <Link to="/events" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/events" className="text-foreground hover:text-primary transition-colors duration-200 hover:scale-105 transform">
                 Events
               </Link>
-              <Link to="/create-event" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/create-event" className="text-foreground hover:text-primary transition-colors duration-200 hover:scale-105 transform">
                 Create Event
               </Link>
-              <Link to="/help" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/help" className="text-foreground hover:text-primary transition-colors duration-200 hover:scale-105 transform">
                 Book
               </Link>
             </div>
@@ -82,28 +82,28 @@ export function Navbar() {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link
                 to="/"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors hover:bg-accent rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/events"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors hover:bg-accent rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 Events
               </Link>
               <Link
                 to="/create-event"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors hover:bg-accent rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 Create Event
               </Link>
               <Link
                 to="/help"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors hover:bg-accent rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 Book
