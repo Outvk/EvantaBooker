@@ -9,6 +9,8 @@ import Events from "./pages/Events";
 import EventDetails from "./pages/EventDetails";
 import Booking from "./pages/Booking";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/events/:id" element={<EventDetails />} />
             <Route path="/booking/:id" element={<Booking />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

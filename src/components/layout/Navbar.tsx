@@ -64,12 +64,16 @@ export function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-black">
-              <User className="h-4 w-4 mr-2" />
-              Login
+            <Button asChild variant="ghost" size="sm" className="text-gray-600 hover:text-black">
+              <Link to="/login">
+                <User className="h-4 w-4 mr-2" />
+                Login
+              </Link>
             </Button>
-            <Button size="sm" className="bg-black hover:bg-gray-800">
-              Sign Up
+            <Button asChild size="sm" className="bg-black hover:bg-gray-800">
+              <Link to="/signup">
+                Sign Up
+              </Link>
             </Button>
           </div>
 
@@ -104,12 +108,16 @@ export function Navbar() {
               </Link>
             ))}
             <div className="pt-4 border-t border-gray-200 space-y-2">
-              <Button variant="ghost" size="sm" className="w-full justify-start">
-                <User className="h-4 w-4 mr-2" />
-                Login
+              <Button asChild variant="ghost" size="sm" className="w-full justify-start">
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </Link>
               </Button>
-              <Button size="sm" className="w-full bg-black hover:bg-gray-800">
-                Sign Up
+              <Button asChild size="sm" className="w-full bg-black hover:bg-gray-800">
+                <Link to="/signup" onClick={() => setIsOpen(false)}>
+                  Sign Up
+                </Link>
               </Button>
             </div>
           </div>
