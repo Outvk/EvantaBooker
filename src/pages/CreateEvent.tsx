@@ -32,15 +32,15 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-12">
+    <div className="min-h-screen pt-20 pb-12 bg-background">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-black mb-4">Create Event</h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Create Event</h1>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Share your event with the world. Fill out the form below to get started.
           </p>
         </motion.div>
@@ -49,12 +49,12 @@ export default function CreateEvent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-lg border border-gray-200 p-8"
+          className="bg-card rounded-lg border border-border p-8"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="title">Event Title *</Label>
+                <Label htmlFor="title" className="text-card-foreground">Event Title *</Label>
                 <Input
                   id="title"
                   name="title"
@@ -65,13 +65,13 @@ export default function CreateEvent() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="category">Category *</Label>
+                <Label htmlFor="category" className="text-card-foreground">Category *</Label>
                 <select
                   id="category"
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 >
                   <option value="">Select category</option>
@@ -86,7 +86,7 @@ export default function CreateEvent() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description *</Label>
+              <Label htmlFor="description" className="text-card-foreground">Description *</Label>
               <textarea
                 id="description"
                 name="description"
@@ -94,14 +94,14 @@ export default function CreateEvent() {
                 onChange={handleInputChange}
                 placeholder="Describe your event"
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black resize-none"
+                className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                 required
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="date">Date *</Label>
+                <Label htmlFor="date" className="text-card-foreground">Date *</Label>
                 <Input
                   id="date"
                   name="date"
@@ -112,7 +112,7 @@ export default function CreateEvent() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="time">Time *</Label>
+                <Label htmlFor="time" className="text-card-foreground">Time *</Label>
                 <Input
                   id="time"
                   name="time"
@@ -125,7 +125,7 @@ export default function CreateEvent() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="location">Location *</Label>
+              <Label htmlFor="location" className="text-card-foreground">Location *</Label>
               <Input
                 id="location"
                 name="location"
@@ -138,7 +138,7 @@ export default function CreateEvent() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="price">Ticket Price ($)</Label>
+                <Label htmlFor="price" className="text-card-foreground">Ticket Price ($)</Label>
                 <Input
                   id="price"
                   name="price"
@@ -151,7 +151,7 @@ export default function CreateEvent() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="capacity">Capacity</Label>
+                <Label htmlFor="capacity" className="text-card-foreground">Capacity</Label>
                 <Input
                   id="capacity"
                   name="capacity"
@@ -170,7 +170,7 @@ export default function CreateEvent() {
               <Button type="button" variant="outline">
                 Save as Draft
               </Button>
-              <Button type="submit" className="bg-black hover:bg-gray-800">
+              <Button type="submit" className="bg-primary hover:bg-primary/90">
                 Publish Event
               </Button>
             </div>
@@ -181,7 +181,7 @@ export default function CreateEvent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mt-8 text-center text-gray-600"
+          className="mt-8 text-center text-muted-foreground"
         >
           <p className="text-sm">
             By creating an event, you agree to our Terms of Service and Community Guidelines.

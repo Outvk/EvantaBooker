@@ -32,15 +32,15 @@ export default function HelpCenter() {
   ];
 
   return (
-    <div className="min-h-screen pt-20 pb-12">
+    <div className="min-h-screen pt-20 pb-12 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-black mb-4">Help Center</h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Help Center</h1>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Find answers to common questions and get the help you need to make the most of EventBooker.
           </p>
         </motion.div>
@@ -49,16 +49,16 @@ export default function HelpCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-lg border border-gray-200 p-8 mb-12"
+          className="bg-card rounded-lg border border-border p-8 mb-12"
         >
-          <h2 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-card-foreground">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg px-6">
-                <AccordionTrigger className="text-left font-medium">
+              <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-lg px-6">
+                <AccordionTrigger className="text-left font-medium text-card-foreground">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-600 pt-2">
+                <AccordionContent className="text-muted-foreground pt-2">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -72,38 +72,38 @@ export default function HelpCenter() {
           transition={{ delay: 0.2 }}
           className="grid md:grid-cols-2 gap-8"
         >
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
-            <h3 className="text-xl font-semibold mb-4">Contact Support</h3>
+          <div className="bg-card rounded-lg border border-border p-8">
+            <h3 className="text-xl font-semibold mb-4 text-card-foreground">Contact Support</h3>
             <div className="space-y-4">
               <div>
-                <p className="font-medium">Email</p>
-                <p className="text-gray-600">support@eventbooker.com</p>
+                <p className="font-medium text-card-foreground">Email</p>
+                <p className="text-muted-foreground">support@eventbooker.com</p>
               </div>
               <div>
-                <p className="font-medium">Phone</p>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+                <p className="font-medium text-card-foreground">Phone</p>
+                <p className="text-muted-foreground">+1 (555) 123-4567</p>
               </div>
               <div>
-                <p className="font-medium">Hours</p>
-                <p className="text-gray-600">24/7 Support Available</p>
+                <p className="font-medium text-card-foreground">Hours</p>
+                <p className="text-muted-foreground">24/7 Support Available</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
-            <h3 className="text-xl font-semibold mb-4">Getting Started</h3>
+          <div className="bg-card rounded-lg border border-border p-8">
+            <h3 className="text-xl font-semibold mb-4 text-card-foreground">Getting Started</h3>
             <div className="space-y-3">
               <div>
-                <p className="font-medium">1. Browse Events</p>
-                <p className="text-gray-600 text-sm">Explore our wide selection of events</p>
+                <p className="font-medium text-card-foreground">1. Browse Events</p>
+                <p className="text-muted-foreground text-sm">Explore our wide selection of events</p>
               </div>
               <div>
-                <p className="font-medium">2. Create Account</p>
-                <p className="text-gray-600 text-sm">Sign up for faster booking</p>
+                <p className="font-medium text-card-foreground">2. Create Account</p>
+                <p className="text-muted-foreground text-sm">Sign up for faster booking</p>
               </div>
               <div>
-                <p className="font-medium">3. Book & Enjoy</p>
-                <p className="text-gray-600 text-sm">Complete your booking and attend</p>
+                <p className="font-medium text-card-foreground">3. Book & Enjoy</p>
+                <p className="text-muted-foreground text-sm">Complete your booking and attend</p>
               </div>
             </div>
           </div>
