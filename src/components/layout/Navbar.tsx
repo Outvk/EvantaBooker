@@ -1,13 +1,12 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Calendar, Menu, X, Sun, Moon } from "lucide-react";
+import { Calendar, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/contexts/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const navigation = [
@@ -44,15 +43,6 @@ export function Navbar() {
             <Link to="/help" className="text-foreground hover:text-primary transition-colors">
               Help
             </Link>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-foreground hover:text-primary"
-            >
-              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            </Button>
 
             <div className="flex items-center space-x-4">
               <Button variant="ghost" onClick={() => navigate('/login')}>
@@ -65,15 +55,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-foreground hover:text-primary"
-            >
-              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            </Button>
+          <div className="md:hidden flex items-center">
             <Button
               variant="ghost"
               size="icon"

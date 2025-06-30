@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
@@ -23,31 +22,29 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <div className="min-h-screen bg-background">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/events/:id" element={<EventDetails />} />
-              <Route path="/booking/:id" element={<Booking />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/help" element={<HelpCenter />} />
-              <Route path="/create-event" element={<CreateEvent />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
-            <ScrollToTop />
-          </div>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <div className="min-h-screen bg-background">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:id" element={<EventDetails />} />
+            <Route path="/booking/:id" element={<Booking />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+          <ScrollToTop />
+        </div>
+      </BrowserRouter>
+    </TooltipProvider>
   </QueryClientProvider>
 );
 
