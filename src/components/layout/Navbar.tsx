@@ -13,13 +13,13 @@ export function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
     { name: 'Create Event', href: '/create-event' },
-    { name: 'Help', href: '/help' },
+    { name: 'Book', href: '/help' },
   ];
 
   return (
     <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="p-2 bg-primary rounded-lg">
@@ -29,29 +29,32 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-foreground hover:text-primary transition-colors">
-              Home
-            </Link>
-            <Link to="/events" className="text-foreground hover:text-primary transition-colors">
-              Events
-            </Link>
-            <Link to="/create-event" className="text-foreground hover:text-primary transition-colors">
-              Create Event
-            </Link>
-            <Link to="/help" className="text-foreground hover:text-primary transition-colors">
-              Help
-            </Link>
-
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate('/login')}>
-                Login
-              </Button>
-              <Button onClick={() => navigate('/signup')}>
-                Sign Up
-              </Button>
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="flex items-center space-x-8">
+              <Link to="/" className="text-foreground hover:text-primary transition-colors">
+                Home
+              </Link>
+              <Link to="/events" className="text-foreground hover:text-primary transition-colors">
+                Events
+              </Link>
+              <Link to="/create-event" className="text-foreground hover:text-primary transition-colors">
+                Create Event
+              </Link>
+              <Link to="/help" className="text-foreground hover:text-primary transition-colors">
+                Book
+              </Link>
             </div>
+          </div>
+
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="ghost" onClick={() => navigate('/login')}>
+              Login
+            </Button>
+            <Button onClick={() => navigate('/signup')}>
+              Sign Up
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -103,7 +106,7 @@ export function Navbar() {
                 className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Help
+                Book
               </Link>
               <div className="flex flex-col space-y-2 px-3 pt-2">
                 <Button variant="ghost" onClick={() => { navigate('/login'); setIsOpen(false); }}>
