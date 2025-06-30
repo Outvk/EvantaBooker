@@ -11,6 +11,8 @@ import Booking from "./pages/Booking";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import HelpCenter from "./pages/HelpCenter";
+import CreateEvent from "./pages/CreateEvent";
 import NotFound from "./pages/NotFound";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/create-event" element={<CreateEvent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
