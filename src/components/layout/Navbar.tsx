@@ -32,21 +32,17 @@ export function Navbar() {
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
-              <Link to="/" className="relative text-foreground hover:text-primary transition-colors duration-300 overflow-hidden group">
-                <span className="relative z-10">Home</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out"></div>
+              <Link to="/" className="text-foreground hover:text-primary transition-colors">
+                Home
               </Link>
-              <Link to="/events" className="relative text-foreground hover:text-primary transition-colors duration-300 overflow-hidden group">
-                <span className="relative z-10">Events</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out"></div>
+              <Link to="/events" className="text-foreground hover:text-primary transition-colors">
+                Events
               </Link>
-              <Link to="/create-event" className="relative text-foreground hover:text-primary transition-colors duration-300 overflow-hidden group">
-                <span className="relative z-10">Create Event</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out"></div>
+              <Link to="/create-event" className="text-foreground hover:text-primary transition-colors">
+                Create Event
               </Link>
-              <Link to="/help" className="relative text-foreground hover:text-primary transition-colors duration-300 overflow-hidden group">
-                <span className="relative z-10">Book</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out"></div>
+              <Link to="/help" className="text-foreground hover:text-primary transition-colors">
+                Book
               </Link>
             </div>
           </div>
