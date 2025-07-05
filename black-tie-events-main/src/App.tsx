@@ -21,7 +21,7 @@ import CreateEvent from "./pages/CreateEvent";
 import NotFound from "./pages/NotFound";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
-import { DashboardButton } from "./components/ui/dashboard-button";
+
 
 const queryClient = new QueryClient();
 
