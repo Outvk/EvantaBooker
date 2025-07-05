@@ -18,6 +18,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
+import { HeroImageControl } from "@/components/ui/HeroImageControl";
+import { HistoriqueTab, HeroHistoryItem } from "@/components/ui/HistoriqueTab";
+import { HeroVideoControl } from "@/components/ui/HeroVideoControl";
 
 const mockStats = {
   totalUsers: 1250,
@@ -83,8 +86,46 @@ const mockUsers = [
   }
 ];
 
+import { AdminSidebar } from "@/components/layout/AdminSidebar";
+
+import { useEffect } from "react";
+
 export default function AdminDashboard() {
+  const [heroHistory, setHeroHistory] = useState<HeroHistoryItem[]>(() => {
+    const stored = localStorage.getItem("heroHistory");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  // Save new image to history
+  const handleSaveHeroImage = () => {
+    localStorage.setItem('heroImageUrl', heroImageUrl);
+    const newItem: HeroHistoryItem = { type: 'image', url: heroImageUrl, savedAt: new Date().toISOString() };
+    const updated = [newItem, ...heroHistory.filter(h => !(h.type==='image' && h.url===heroImageUrl))].slice(0, 30);
+    setHeroHistory(updated);
+    localStorage.setItem('heroHistory', JSON.stringify(updated));
+  };
+  // Save new video to history
+  const handleSaveHeroVideo = () => {
+    localStorage.setItem('heroVideoUrl', heroVideoUrl);
+    const newItem: HeroHistoryItem = { type: 'video', url: heroVideoUrl, savedAt: new Date().toISOString() };
+    const updated = [newItem, ...heroHistory.filter(h => !(h.type==='video' && h.url===heroVideoUrl))].slice(0, 30);
+    setHeroHistory(updated);
+    localStorage.setItem('heroHistory', JSON.stringify(updated));
+  };
+
+  const [heroImageUrl, setHeroImageUrl] = useState<string>(localStorage.getItem("heroImageUrl") || "");
+  const [heroVideoUrl, setHeroVideoUrl] = useState<string>(localStorage.getItem("heroVideoUrl") || "");
+  const [previewType, setPreviewType] = useState<'image' | 'video' | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>("");
+
+  // Optional: When switching between cards, show the latest saved value by default
+  useEffect(() => {
+    if (previewType === 'image') setPreviewUrl(heroImageUrl);
+    if (previewType === 'video') setPreviewUrl(heroVideoUrl);
+    // eslint-disable-next-line
+  }, [previewType]);
   const [activeTab, setActiveTab] = useState("overview");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
   const formatDate = (dateString: string) => {
@@ -110,8 +151,31 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="pt-16 min-h-screen bg-gray-50 flex">
+      {/* Admin Sidebar (left) */}
+      {sidebarOpen && (
+        <AdminSidebar
+          activeTab={activeTab}
+          onTabChange={tab => {
+            if (tab === 'toggle-sidebar') setSidebarOpen(false);
+            else setActiveTab(tab);
+          }}
+        />
+      )}
+      {/* Sidebar toggle button for mobile */}
+      {!sidebarOpen && (
+        <button
+          className="fixed top-6 left-4 z-50 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-full shadow p-2 focus:outline-none lg:hidden"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open Sidebar"
+        >
+          <span className="block w-5 h-0.5 bg-gray-800 dark:bg-white mb-1"></span>
+          <span className="block w-5 h-0.5 bg-gray-800 dark:bg-white mb-1"></span>
+          <span className="block w-5 h-0.5 bg-gray-800 dark:bg-white"></span>
+        </button>
+      )}
+      {/* Main dashboard content, shifts right when sidebar open */}
+      <div className={`flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 transition-all duration-300 ${sidebarOpen ? 'lg:ml-72' : ''}`}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -129,6 +193,90 @@ export default function AdminDashboard() {
             </Button>
           </div>
         </motion.div>
+
+        <div id="overview"></div>
+        <Tabs defaultValue="dashboard" className="w-full mb-8">
+          <TabsList>
+            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+            <TabsTrigger value="historique">Historique</TabsTrigger>
+          </TabsList>
+          <TabsContent value="dashboard">
+            <div className="flex flex-col lg:flex-row gap-8 w-full">
+              {/* Left: Controls */}
+              <div className="flex flex-col gap-8 w-full lg:max-w-xl">
+                {/* Hero Image Control */}
+                <div className="p-6 bg-white rounded-xl shadow border border-gray-200">
+                  <h2 className="text-lg font-bold mb-2">Home Hero Image</h2>
+                  <p className="mb-4 text-gray-600 text-sm">Set the image URL for the hero section on the Home page.</p>
+                  <div className="flex flex-col gap-2">
+                    <HeroImageControl
+                      value={heroImageUrl}
+                      onChange={url => {
+                        setHeroImageUrl(url);
+                        setPreviewType('image');
+                        setPreviewUrl(url);
+                      }}
+                      onSave={handleSaveHeroImage}
+                      onShowPreview={() => {
+                        setPreviewType('image');
+                        setPreviewUrl(heroImageUrl);
+                      }}
+                    />
+                  </div>
+                </div>
+                {/* Hero Video Control */}
+                <div className="p-6 bg-white rounded-xl shadow border border-gray-200 mb-8">
+                  <h2 className="text-lg font-bold mb-2">Home Hero Video</h2>
+                  <p className="mb-4 text-gray-600 text-sm">Set the video URL for the hero section modal on the Home page.</p>
+                  <div className="flex flex-col gap-2">
+                    <HeroVideoControl
+                      value={heroVideoUrl}
+                      onChange={url => {
+                        setHeroVideoUrl(url);
+                        setPreviewType('video');
+                        setPreviewUrl(url);
+                      }}
+                      onSave={handleSaveHeroVideo}
+                      onShowPreview={() => {
+                        setPreviewType('video');
+                        setPreviewUrl(heroVideoUrl);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Right: Preview Panel */}
+              <div className="flex-1 flex justify-center items-start pt-6">
+                {previewType === 'image' && previewUrl ? (
+                  <img
+                    src={previewUrl}
+                    alt="Image Preview"
+                    className="rounded-xl border border-gray-200 max-h-[400px] max-w-full object-contain bg-white shadow"
+                    onError={e => (e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image')}
+                  />
+                ) : previewType === 'video' && previewUrl ? (
+                  <video
+                    src={previewUrl}
+                    controls
+                    className="rounded-xl border border-gray-200 max-h-[400px] max-w-full object-contain bg-black shadow"
+                    onError={e => (e.currentTarget.poster = 'https://via.placeholder.com/400x300?text=No+Video')}
+                  >
+                    Sorry, your browser does not support embedded videos.
+                  </video>
+                ) : (
+                  <div className="text-gray-400 text-center w-full">No preview selected</div>
+                )}
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="historique">
+            <HistoriqueTab heroHistory={heroHistory} />
+          </TabsContent>
+        </Tabs>
+
+        <div id="events"></div>
+        <div id="users"></div>
+        <div id="settings"></div>
 
         {/* Stats Cards */}
         <motion.div
@@ -201,10 +349,11 @@ export default function AdminDashboard() {
           transition={{ delay: 0.2 }}
         >
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="events">Events</TabsTrigger>
+              <TabsTrigger value="events">Manage Events</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}
@@ -389,6 +538,28 @@ export default function AdminDashboard() {
                     </Card>
                   </motion.div>
                 ))}
+              </div>
+            </TabsContent>
+
+            {/* Settings Tab */}
+            <TabsContent value="settings" className="space-y-6">
+              <div className="max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-xl shadow p-8 border border-gray-200 dark:border-gray-800">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Admin Settings</h3>
+                <form className="space-y-4">
+                  <div>
+                    <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">Name</label>
+                    <input type="text" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Admin Name" />
+                  </div>
+                  <div>
+                    <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">Email</label>
+                    <input type="email" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="admin@email.com" />
+                  </div>
+                  <div>
+                    <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">Change Password</label>
+                    <input type="password" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="New Password" />
+                  </div>
+                  <button type="submit" className="w-full px-4 py-2 rounded-lg bg-black text-white font-semibold hover:bg-gray-900 transition">Save Settings</button>
+                </form>
               </div>
             </TabsContent>
           </Tabs>

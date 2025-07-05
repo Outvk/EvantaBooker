@@ -78,6 +78,7 @@ const benefits = [
 import "./Home.css";
 import { useState, useRef, useEffect } from "react";
 import { VideoDialog } from "./VideoDialog";
+import { HeroMediaVisualizer } from "@/components/ui/HeroMediaVisualizer";
 import { AnimatedWords } from "@/components/ui/AnimatedWords";
 import { LogoCarousel } from "@/components/ui/LogoCarousel";
 
@@ -85,8 +86,19 @@ export default function Home() {
   const [videoOpen, setVideoOpen] = useState(false);
   const [showLearnMore, setShowLearnMore] = useState(false);
   const learnMoreRef = useRef<HTMLDivElement | null>(null);
-  // Use a fixed video URL. Replace with your own if you have a local file.
-  const videoUrl = "https://www.w3schools.com/html/mov_bbb.mp4";
+  // Hero video state
+  const [heroVideoUrl, setHeroVideoUrl] = useState<string>("https://www.w3schools.com/html/mov_bbb.mp4");
+  useEffect(() => {
+    const storedVideoUrl = localStorage.getItem('heroVideoUrl');
+    if (storedVideoUrl) setHeroVideoUrl(storedVideoUrl);
+  }, []);
+
+  // Hero image state
+  const [heroImageUrl, setHeroImageUrl] = useState<string>("/hero-party.jpg");
+  useEffect(() => {
+    const storedUrl = localStorage.getItem('heroImageUrl');
+    if (storedUrl) setHeroImageUrl(storedUrl);
+  }, []);
 
   useEffect(() => {
     if (!showLearnMore) return;
@@ -150,7 +162,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 <img
-                  src="/hero-party.jpg"
+                  src={heroImageUrl}
                   alt="Saturday Party Hero"
                   className="w-full h-full object-cover hero-cursor-img"
                   onClick={() => setVideoOpen(true)}
@@ -319,7 +331,7 @@ export default function Home() {
     >
       <LogoCarousel />
     </motion.div>
-      <VideoDialog open={videoOpen} onOpenChange={setVideoOpen} videoUrl={videoUrl} />
+      <VideoDialog open={videoOpen} onOpenChange={setVideoOpen} videoUrl={heroVideoUrl} />
     </div>
   );
 }
