@@ -1,0 +1,6 @@
+.hero-cursor-img {
+  cursor: pointer;
+}
+.hero-cursor-img:hover {
+  cursor: url('/hero-cursor.svg') 6 2, pointer !important;
+}
